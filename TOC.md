@@ -8,7 +8,7 @@
 1. Introduction - 1- and 2-way ANOVA and beyond
 
 #### 'The' book: Pinheiro, J.C., and Bates, D.M. (2000) *Mixed-Effects Models in S and S-PLUS*, Springer.
-	available typically [here](https://link.springer.com/book/10.1007%2Fb98882)
+	available typically at https://link.springer.com/book/10.1007%2Fb98882
 
   a. `nlme` (book) chapter 1: Rail, ... .. "anova" notation: 1-way anova, 2-way
      R(markdown) script: [R/ch01.Rmd](R/ch01.Rmd) -- and nicely

@@ -12,7 +12,7 @@
 
   a. `nlme` (book) chapter 1: Rail, ... .. "anova" notation: 1-way anova, 2-way
      R(markdown) script: [R/ch01.Rmd](R/ch01.Rmd) -- and nicely
-     `rmarkdown::render()`ed [html](R/ch01.html).
+     `rmarkdown::render()`ed [html](https://polybox.ethz.ch/index.php/s/zaXWK8VvECC8vuL).
 
   b. `lMMwR` (not-yet-book by Doug Bates) chapter 1: sleepstudy --
 

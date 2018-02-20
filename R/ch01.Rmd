@@ -3,7 +3,7 @@ From **The Book**
 #  *Mixed-Effects Models in S and S-PLUS*, Springer.
 
 - Copyright (2000) Jose Pinheiro and Douglas Bates (Book!!)
-- Copyright (2018) Martin Maechler (transl. to Rmd; additional plots/)
+- Copyright (2018) Martin Maechler (transl. to `Rmd`; additional plots, etc)
 
 # Chapter 1 ---  Linear Mixed-Effects Models: Basic Concepts and Examples
 
@@ -19,11 +19,12 @@ options(width = 65, digits = 5 ,
 ## 1.1 A Simple Example of Random Effects
 
 ```{r, Rail-ex}
-plot(Rail)
-str(Rail)
+Rail # (6 x 3 = 18 rows, 2 columns)
+plot(Rail) # (plots nicely because it is a 'groupedData' obj. w/ extra info :)
+str(Rail)  # shows *ordered* factor we don't want for the lm() ["fixed effects"]:
 Rail.u <- within(Rail, Rail <- factor(Rail, ordered=FALSE))
 str(Rail.u)
-fm1Rail.lm <- lm( travel ~ 1, data = Rail )
+fm1Rail.lm <- lm(travel ~ 1, data = Rail) # intercept only: μ^ = Ȳ.
 summary(fm1Rail.lm)
 fm2.Rail.lm <- lm( travel ~ Rail, data = Rail.u )
 summary(fm2.Rail.lm)

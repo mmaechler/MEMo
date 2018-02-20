@@ -1,6 +1,9 @@
 From **The Book**
-  Pinheiro, J.C., and Bates, D.M. (2000)
-  *Mixed-Effects Models in S and S-PLUS*, Springer.
+#  Pinheiro, J.C., and Bates, D.M. (2000)
+#  *Mixed-Effects Models in S and S-PLUS*, Springer.
+
+- Copyright (2000) Jose Pinheiro and Douglas Bates (Book!!)
+- Copyright (2018) Martin Maechler (transl. to Rmd; additional plots/)
 
 # Chapter 1 ---  Linear Mixed-Effects Models: Basic Concepts and Examples
 
@@ -16,10 +19,18 @@ options(width = 65, digits = 5 ,
 ## 1.1 A Simple Example of Random Effects
 
 ```{r, Rail-ex}
+plot(Rail)
+str(Rail)
+Rail.u <- within(Rail, Rail <- factor(Rail, ordered=FALSE))
+str(Rail.u)
 fm1Rail.lm <- lm( travel ~ 1, data = Rail )
-fm1Rail.lm
-fm2Rail.lm <- lm( travel ~ Rail - 1, data = Rail )
-fm2Rail.lm
+summary(fm1Rail.lm)
+fm2.Rail.lm <- lm( travel ~ Rail, data = Rail.u )
+summary(fm2.Rail.lm)
+fm2Rail.lm<- lm( travel ~ Rail - 1, data = Rail.u )
+summary(fm2Rail.lm)
+anova(fm2Rail.lm)
+
 fm1Rail.lme <- lme(travel ~ 1, data = Rail, random = ~ 1 | Rail)
 summary( fm1Rail.lme )
 fm1Rail.lmeML <- update( fm1Rail.lme, method = "ML" )
@@ -33,12 +44,14 @@ anova( fm1Rail.lme )
 
 ```{r, ergoStool-ex}
 plot.design( ergoStool )   # produces Figure 1.6
+plot(ergoStool)
 contrasts( ergoStool$Type )
 ergoStool1 <- ergoStool[ ergoStool$Subject == "1", ]
 model.matrix( effort ~ Type, ergoStool1 )   # X matrix for Subject 1
 fm1Stool <-
   lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject)
 summary( fm1Stool )
+zapsmall( vcov(fm1Stool) )
 anova( fm1Stool )
 options( contrasts = c( factor = "contr.treatment",
                         ordered = "contr.poly" ) )
@@ -61,6 +74,7 @@ plot( fm1Stool,   # produces Figure 1.8
 ## 1.3  Mixed-effects Models for Replicated, Blocked Designs
 
 ```{r, Machines-ex}
+plot(Machines)
 with(Machines, interaction.plot( Machine, Worker, score, las = 1))   # Figure 1.10
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
@@ -92,7 +106,11 @@ anova( fm1Machine, fm2Machine )
  anova( fm1Machine, fm2Machine, fm3Machine )
 ```
 
-## 1.4 An Analysis of Covariance Model
+## 1.4  An Analysis of Covariance Model
+
+### 1.4.1  Modelling Simple Linear Growth Curves
+
+- also known as  _"Repeated Measurements"_ / _"longitudinal data"_
 
 ```{r, Orthodont-ex}
 '?Orthodont' # look at help page

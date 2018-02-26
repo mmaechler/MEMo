@@ -18,20 +18,42 @@ options(width = 65, digits = 5 ,
 
 ## 1.1 A Simple Example of Random Effects
 
-```{r, Rail-ex}
-Rail # (6 x 3 = 18 rows, 2 columns)
+```{r, Rail-simple}
+Rail # --> (6 x 3 = 18 rows, 2 columns)
 plot(Rail) # (plots nicely because it is a 'groupedData' obj. w/ extra info :)
 str(Rail)  # shows *ordered* factor we don't want for the lm() ["fixed effects"]:
 Rail.u <- within(Rail, Rail <- factor(Rail, ordered=FALSE))
 str(Rail.u)
-fm1Rail.lm <- lm(travel ~ 1, data = Rail) # intercept only: μ^ = Ȳ.
+fm1Rail.lm <- lm( travel ~ 1, data = Rail ) # intercept only: μ^ = Ȳ.
 summary(fm1Rail.lm)
+```
+A one-way (1-way) ANOVA model assumes "Rail effect",
+$$ Y_{i,j} = \mu + \beta_i + \varepsilon_{i,j}, $$
+with $i = 1,2,\dots,m (= 6)$, for $j=1,\dots,n_i ( = 6)$, for $n$ observations $n = \sum_{i=1}^m$,
+and the usual assumption
+$$\varepsilon_{i,j} \mathrm{i.i.d.} \ \sim  \mathcal{N}(0, \sigma^2).$$
+
+
+```{r, Rail-lm}
+## if we have an intercept, cannot use all 6 levels (singular matrix):
 fm2.Rail.lm <- lm( travel ~ Rail, data = Rail.u )
-summary(fm2.Rail.lm)
-fm2Rail.lm<- lm( travel ~ Rail - 1, data = Rail.u )
+summary(fm2.Rail.lm) # R's default is 'treatment' contrast: 1st level := 0
+## In this case of  1-way ANOVA: Nicer to drop the intercept
+fm2Rail.lm <- lm( travel ~ Rail - 1, data = Rail.u )
 summary(fm2Rail.lm)
 anova(fm2Rail.lm)
+```
+and the Rail effect _is_ significant.  Alternatively, as the rails are
+randomly selected from a large number of possible rails, we consider a
+__random__ Rail effect,
 
+$$ Y_{i,j} = \mu + \b_i + \varepsilon_{i,j}, $$
+for $ i = 1,2,\dots,m;  j=1,\dots,n_i$, where $b_i \sim \mathcal{N}(0,
+\sigma_b^2)$ and the $b_i$ and $\varepsilon_{i,j}$ are independent.
+
+Instead of the $m-1$ parameters $\beta_i$ ("-1" via a contrast setting),
+have only one parameter $\sigma_b^2$ here:
+```{r, Rail-lmE}
 fm1Rail.lme <- lme(travel ~ 1, data = Rail, random = ~ 1 | Rail)
 summary( fm1Rail.lme )
 fm1Rail.lmeML <- update( fm1Rail.lme, method = "ML" )
@@ -41,21 +63,52 @@ intervals( fm1Rail.lme )
 anova( fm1Rail.lme )
 ```
 
+But we can get at the __predicted__ random effects, too via `ranef(.)`, and
+here, their empirical mean is equal to the theoretical $E[.] = 0$.
+```{r, ranef}
+ranef( fm1Rail.lme ); cat("sum(ranef(.)): ", round( sum(ranef(fm1Rail.lme)), 4),"\n")
+```
+
+How do the predicted random effects compare with the corresponding fixed
+effects?  This is useful, if we use a __third__ way to specify contrasts
+for the fixed effects:  `sum` contrasts ensure $\sum_{k=1}^6 \beta_k = 0$:
+Instead of using `options(constrasts = ...)`, use `C(*, sum)` in formula:
+```{r, ranef-fixef}
+fm.Rail.lm.sum <- lm( travel ~ C(Rail, sum), data = Rail.u )
+(dcf <- dummy.coef(fm.Rail.lm.sum)[[2]])
+(re.fe <- cbind(RE = ranef(fm1Rail.lme)[[1]], FE = dcf))
+matplot(re.fe, xaxt = "n", main="random and fixed effects") ; abline(h=0, lty=3)
+legend("topleft", col=1:2, c("random", "fixed"), pch=as.character(1:2), bty="n")
+axis(1, at=1:6, labels = rownames(re.fe))
+```
+
+the differences are so small, you don't see them in the plot (unless you
+look *very* carefully ...
+```{r, re-fe-diff}
+cbind(re.fe, D = re.fe[,1] - re.fe[,2]) # *systematic* difference
+```
+
+Indeed, the random effects are slightly smaller in absolute value, or,
+expressed more mathematically, the random effects look like the fixed
+effects, "shrunken towards zero".
+We will see that this is really what happens much more generally.
+
+
 ## 1.2 A Randomized Block Design
 
 ```{r, ergoStool-ex}
 plot.design( ergoStool )   # produces Figure 1.6
-plot(ergoStool)
-contrasts( ergoStool$Type )
+plot(ergoStool) ##-> 4 Types of stool, 9 subject
+contrasts( ergoStool$Type ) # treatments
 ergoStool1 <- ergoStool[ ergoStool$Subject == "1", ]
-model.matrix( effort ~ Type, ergoStool1 )   # X matrix for Subject 1
+model.matrix( effort ~ Type, ergoStool1)  # X matrix for Subject 1 ~~ contrasts!
 fm1Stool <-
   lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject)
 summary( fm1Stool )
-zapsmall( vcov(fm1Stool) )
+zapsmall( vcov(fm1Stool) ) # Helmert contrasts ==> uncorrelated coef.
 anova( fm1Stool )
-options( contrasts = c( factor = "contr.treatment",
-                        ordered = "contr.poly" ) )
+op <- options( contrasts = c(factor = "contr.treatment", ## the defaults in R:
+                             ordered = "contr.poly" ) )
 contrasts( ergoStool$Type )
 fm2Stool <-
   lme(effort ~ Type, data = ergoStool, random = ~ 1 | Subject)
@@ -70,20 +123,44 @@ intervals( fm1Stool )
 plot( fm1Stool,   # produces Figure 1.8
       form = resid(., type = "p") ~ fitted(.) | Subject,
       abline = 0 )
+options(op) # reset in order to reproduce "the book"
 ```
 
 ## 1.3  Mixed-effects Models for Replicated, Blocked Designs
 
-```{r, Machines-ex}
+```{r, Machines-plot}
 plot(Machines)
+```
+
+Here, we have a 2-way anova (fixed eff `Machine`, random eff `Worker`),
+*with* replications (3 each), a (main effect) model being
+
+$$ Y_{i,j,k} = \mu + \beta_j + b_i + \varepsilon_{i,j,k}, $$
+and $ i = 1,2,\dots,9$   $j=1,2,3$;  $k=1,2,3$.
+
+If this model was correct, the `interaction.plot()` which plots the mean
+(over $k$) for each $(i,j$) should show __parallel__ polylines,
+```{r, Mach-interaction-plot}
 with(Machines, interaction.plot( Machine, Worker, score, las = 1))   # Figure 1.10
+```
+Fitting a mixed effects model now,
+```{r, Machines-lme}
 fm1Machine <-
   lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
 fm1Machine
+```
+As we have replicates for each $(i,j)$ we can estimate a (random) __interaction__
+```{r, Machines+int}
 fm2Machine <- update( fm1Machine, random = ~ 1 | Worker/Machine )
-fm2Machine
+summary(fm2Machine)
 anova( fm1Machine, fm2Machine )
 ```
+which looks significantly better than the main-effect only term.
+The model fit `fm2Machine` corresponds to the mathematical model
+
+$$ Y_{i,j,k} = \mu + \beta_j + b_i + \tilde b_{i,j} + \varepsilon_{i,j,k}.$$
+
+
 ### 1.3.2  _Unbalanced_ Data
 ```{r, Unbal-Mach-ex}
  ## delete selected rows from the Machines data
@@ -94,14 +171,21 @@ anova( fm1Machine, fm2Machine )
  fm1MachinesU <- lme( score ~ Machine, data = MachinesUnbal,
                     random = ~ 1 | Worker/Machine )
  fm1MachinesU
- intervals( fm1MachinesU )
+  ## intervals( fm1MachinesU )
+```
+Trying to do the same for the `ergoStool` data (which has *no* replicates):
+```{r, ergoSt-interaction}
  fm4Stool <- lme( effort ~ Type, ergoStool, ~ 1 | Subject/Type )
- if (interactive()) intervals( fm4Stool )
+ ##if (interactive())
+     intervals(fm4Stool) ## looks suspicious
  (fm1Stool$sigma)^2
  (fm4Stool$sigma)^2 + 0.79621^2
+```
+
+```{r, Machines-worker-1}
  Machine1 <- Machines[ Machines$Worker == "1", ]
- model.matrix( score ~ Machine, Machine1 )   # fixed-effects X_i
- model.matrix( ~ Machine - 1, Machine1 )   # random-effects Z_i
+ model.matrix( score ~ Machine, Machine1 )  # fixed-effects  X_i
+ model.matrix( ~ Machine - 1,   Machine1 )  # random-effects Z_i
  fm3Machine <- update( fm1Machine, random = ~Machine - 1 |Worker)
  summary( fm3Machine )
  anova( fm1Machine, fm2Machine, fm3Machine )

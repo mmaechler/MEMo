@@ -1,0 +1,75 @@
+# R Packages for Mixed(-Effects) Models
+
+## The absolute core:
+
+### [`nlme`](https://CRAN.R-project.org/package=nlme)
+### [`lme4`](https://CRAN.R-project.org/package=lme4)
+
+## Other Packages with Mixed Effect Models as main purpose (and recommendable)
+
+- [`lmerTest`](https://CRAN.R-project.org/package=lmerTest)
+- [`glmmTMB`](https://CRAN.R-project.org/package=glmmTMB)
+
+- [`pbkrtest`](https://CRAN.R-project.org/package=pbkrtest), see also the
+  [`pbkrtest` page](http://people.math.aau.dk/~sorenh/software/pbkrtest/)
+  and notably the `demo.R` and resulting
+  [`demo.html`](http://people.math.aau.dk/~sorenh/software/pbkrtest/doc/demo.html) example.
+
+- [`ordinal`](https://CRAN.R-project.org/package=ordinal), fn `clmm()` for
+  *cumulative* LMMs.
+
+## [CRAN Task Views](https://cran.r-project.org/web/views)
+
+There is none, with this topic
+Is there no good one ?
+
+- `nlme` is in
+	`ChemPhys`,
+	`Econometrics`,
+	`Environmetrics`,
+	`Finance`,
+	`OfficialStatistics`,
+	`Psychometrics`,
+	`SocialSciences`,
+	`Spatial`,
+	`SpatioTemporal`,
+
+	whereas
+
+- `lme4` is in
+	`Bayesian`,
+	`Econometrics`,
+	`Environmetrics`,
+	`OfficialStatistics`,
+	`Psychometrics`,
+	`SocialSciences`,
+	`SpatioTemporal`,
+
+- with the intersection
+
+| Task View          | URL                                           | CRAN packages | comments |
+|--------------------|-----------------------------------------------|---------------|----------|
+| `Econometrics`     | https://CRAN.R-project.org/view=Econometrics | nlme, lme4 |   |
+| `Environmetrics`   | https://CRAN.R-project.org/view=Environmetrics | nlme, lme4 | Modelling species responses and other data   |
+|`OfficialStatistics`| https://CRAN.R-project.org/view=OfficialStatistics | nlme, lme4, rsae | (robust) Small Area Estimation  |
+| `Psychometrics`    | https://CRAN.R-project.org/view=Psychometrics | nlme, lme4, ordinal, MCMCglmm, irtrees | Item Response Theory (ITR), Rasch Mod.  |
+| `SocialSciences`   | https://CRAN.R-project.org/view=SocialSciences | nlme, lme4, lmeSplines, lmm, MCMCglmm | Other Regression Methods |
+| `SpatioTemporal`   | https://CRAN.R-project.org/view=SpatioTemporal | nlme, lme4 | (spatio-temporal data)  |
+
+## R (CRAN) packages with `LMM` in their names:
+```{r, lmm-pkgs, cache=TRUE}
+ip <- installed.packages() # ~ 13'000 for Martin Maechler
+str(ip)
+pkgs <- rownames(ip)
+str(LMMs <- grep("lmm", pkgs, ignore.case=TRUE, value=TRUE))
+pdLMM <- lapply(LMMs, packageDescription)
+titLMM <-
+    ttLMM <- gsub("\n", " ",
+                  sapply(setNames(,LMMs), packageDescription, fields = "Title"))
+longT <- nchar(ttLMM) > 80
+ttLMM[longT] <- paste(substr(ttLMM[longT], 1, 77), "...")
+cbind(ttLMM) # 80% are GLMM  amazing
+```
+
+
+## Closely related

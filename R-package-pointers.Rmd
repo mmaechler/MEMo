@@ -10,13 +10,7 @@
 - [`lmerTest`](https://CRAN.R-project.org/package=lmerTest)
 - [`glmmTMB`](https://CRAN.R-project.org/package=glmmTMB)
 
-- [`pbkrtest`](https://CRAN.R-project.org/package=pbkrtest), see also the
-  [`pbkrtest` page](http://people.math.aau.dk/~sorenh/software/pbkrtest/)
-  and notably the `demo.R` and resulting
-  [`demo.html`](http://people.math.aau.dk/~sorenh/software/pbkrtest/doc/demo.html) example.
-
-- [`ordinal`](https://CRAN.R-project.org/package=ordinal), fn `clmm()` for
-  *cumulative* LMMs.
+- [`pbkrtest`](https://CRAN.R-project.org/package=pbkrtest), see also the [`pbkrtest` page](http://people.math.aau.dk/~sorenh/software/pbkrtest/)    and notably the `demo.R` and resulting [`demo.html`](http://people.math.aau.dk/~sorenh/software/pbkrtest/doc/demo.html) example.
 
 ## [CRAN Task Views](https://cran.r-project.org/web/views)
 
@@ -70,6 +64,23 @@ longT <- nchar(ttLMM) > 80
 ttLMM[longT] <- paste(substr(ttLMM[longT], 1, 77), "...")
 cbind(ttLMM) # 80% are GLMM  amazing
 ```
+<!-- When run by  `R RHOME`/bin/Rscript --no-restore --no-save -e 'knitr::knit("R-package-pointers.Rmd")'
+ this fails with (R <-> R-devel) problem (and cache ?):
+ Error in readRDS(file) :
+  cannot read unreleased workspace version 3 written
+  by experimental R 3.5.0 -->
 
 
-## Closely related
+## Closely related packages
+
+- [`ordinal`](https://CRAN.R-project.org/package=ordinal), fn `clmm()` for *cumulative* LMMs.
+- [`lmeSplines`](https://CRAN.R-project.org/package=lmeSplines), based on pkg `nlme`, allows splines for linear and non-linear MM.
+
+- [`mgcv`](https://CRAN.R-project.org/package=mgcv), *Recommended* pkg, has `gamm()`, based on pkg `nlme`.  Alternatively, (and not possible inside *rec.* package `mgcv`):
+- [`gamm4`](https://CRAN.R-project.org/package=gamm4), based on pkg `lme4`, has fn. `gamm4()` based on `lmer()` etc.
+
+
+#### NB. "knit me" to markdown --> `*.md` simply by
+
+	od <- setwd("~/R/D/GH/MEMo"); knitr::knit("R-package-pointers.Rmd") ; setwd(od)
+

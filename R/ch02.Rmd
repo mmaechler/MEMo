@@ -1,0 +1,157 @@
+From **The Book**
+  Pinheiro, J.C., and Bates, D.M. (2000)
+  *Mixed-Effects Models in S and S-PLUS*, Springer.
+
+```{r }
+library( nlme )
+options( width = 65, digits = 5 )
+options( contrasts = c(unordered = "contr.helmert",
+         ordered = "contr.poly") )
+if(!dev.interactive()) ## interactively, rather use color etc
+pdf( file = 'ch02.pdf' )
+```
+
+# Chapter 2    Theory and Computational Methods for Linear Mixed-Effects Models
+
+## 2.2   Likelihood Estimation for LME Models
+
+### 2.2.2  Orthogonal-Triangular Decompositions
+
+#### p. 67  (= pdf p 81)
+
+```{r, QR}
+(Xmat <- cbind(1, c(8, 10, 12, 14)))
+Xqr <- qr( Xmat )               # creates a QR structure
+qr.R( Xqr )                     # returns R
+qr.Q( Xqr )                     # returns Q-truncated
+qr.Q( Xqr, complete = TRUE )    # returns the full Q
+```
+
+### 2.2.8  Optimization Algorithms
+
+#### p. 79 (pdf 93) :  EM Algorithm,  Newton-Raphson.
+
+Note we can use  `msVerbose = TRUE`  to see the iterations :
+
+```{r, msVerbose-1}
+fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
+       control = list( msVerbose = TRUE ) )
+fm1Rail.lme <- lme( travel ~ 1, data = Rail, random = ~ 1 | Rail,
+   control = list( msVerbose = TRUE, niterEM = 0))
+      #  no EM, but only Newton-R.   -----------
+```
+
+
+## 2.4 Hypothesis Tests and Confidence Intervals
+
+### 2.4.1 Likelihood Ratio Tests
+
+#### p. 83 (pdf 97)
+
+```{r, anova-Machine-RanEff}
+fm1Machine <-
+    lme( score ~ Machine, data = Machines, random = ~ 1 | Worker )
+fm2Machine <- update(  fm1Machine,         random = ~ 1 | Worker/Machine )
+anova( fm1Machine, fm2Machine )
+```
+
+(highly significant, L.Ratio  71.19;   P value < .0001)
+
+Addition by MM:  The _same_  with `lme4` :
+```{r, anova-Mach-lme4}
+suppressPackageStartupMessages( require(lme4) )
+fm1M <- lmer(score ~ Machine + (1 | Worker),          Machines)
+fm2M <- lmer(score ~ Machine + (1 | Worker/Machine ), Machines)
+anova(fm1M, fm2M)
+```
+
+Note that it *does* refit both models with ML {which `nlme` did not}.
+The result is similar here, a very highly significant difference.
+
+#### __Simulating__  Likelihood Ratio Test Statistics
+
+MM:  AKA  __"parametric bootstrap"__
+
+#### p. 84 (pdf 98)
+
+```{r, simul-OrthoFem, cache=TRUE}
+OrthoFem <- Orthodont[ Orthodont$Sex == "Female", ]
+fm1OrthF <- lme(distance ~ age, data = OrthoFem, random =  ~ 1  | Subject )
+fm2OrthF <- update(  fm1OrthF,                   random = ~ age | Subject )
+system.time(
+orthLRTsim <- simulate.lme( fm1OrthF, m2 = fm2OrthF, nsim = 1000 )
+) # 8.5 seconds ... plus Warning "Singular precision matrix (level -1, block 1)
+plot( orthLRTsim, df = c(1, 2) )    # produces Figure 2.3
+```
+
+```{r, simul-Mach, cache=TRUE}
+system.time(
+machineLRTsim <- simulate.lme(fm1Machine, m2 = fm2Machine, nsim= 1000)
+) ## 11.5 sec
+plot(machineLRTsim, df = c(0, 1),      # produces Figure 2.4
+     layout = c(4,1), between = list(x = c(0, 0.5, 0)) )
+```
+
+```{r, simul-stool}
+system.time( stoolLRTsim <-
+  simulate.lme(      list(fixed = effort ~ 1, random = ~ 1 | Subject, data = ergoStool),
+                m2 = list(fixed = effort ~ Type), # (other args: the same)
+                method = "ML", nsim = 1000 )
+) ## 2.4 sec
+plot( stoolLRTsim, df = c(3, 4) )    # Figure 2.5
+```
+
+```{r, simul-PBIB, cache=TRUE}
+data( PBIB, package = 'SASmixed')# not in "nlme"
+system.time( pbibLRTsim <-
+    simulate.lme(     list(fixed = response ~ 1,         random = ~ 1 | Block, data = PBIB),
+                 m2 = list(fixed = response ~ Treatment, random = ~ 1 | Block, data = PBIB),
+                 method = "ML", nsim = 1000))# 8.9 sec | ^^^^.. (needed here - why ?)
+plot( pbibLRTsim, df = c(14,16,18), weights = FALSE )    # Figure 2.6
+```
+
+we can see, from Figure 2.6, that the p-values calculated using $χ^2_{14}$ as the reference distribution are _seriously “anticonservative”_.
+
+--- --- ---
+
+Another (more conventional) approach to hypothesis test for _fixed effects_ :
+t-tests for _*marginal*_ effects:
+Using $\hat\theta$ as if it was the true $\theta$
+
+#### p. 90 (pdf 104)
+
+```{r, summary-anova}
+summary( fm2Machine )
+```
+
+And here, using conditional F-tests
+
+```{r, F-test-PBIB}
+fm1PBIB <- lme(response ~ Treatment, data = PBIB, random = ~ 1 | Block)
+anova( fm1PBIB )
+```
+
+which has a p-value of 15.8% for `Treatment`  which seems more realistic
+than the 5.1% we get here from the LRT (which needs "ML" fits !):
+
+```{r, LRT-PBIB}
+fm2PBIB <- update( fm1PBIB, method = "ML" )
+fm3PBIB <- update( fm2PBIB, response ~ 1 )
+anova( fm2PBIB, fm3PBIB )
+```
+
+The book explains how denominator degrees of freedoms, can be derived (in
+such a case; the more modern `lme4` package does *not* do this very much on purpose):
+
+```{r, F-test-Mach}
+anova( fm2Machine )
+```
+
+Another example (not in R's `nlme/scripts/ch02.R` ) is the  Oats data
+example from 1.6, see `../ch01.Rmd`, `fm2Oats`.
+
+
+```{r }
+proc.time()
+```
+

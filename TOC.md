@@ -30,6 +30,18 @@
 
 3. Inference: "No P values" vs `lmerTest` et al.
 
+  a. `nlme` (book) chapter 2, notably 2.4
+     R(markdown) script: [R/ch02.Rmd](R/ch02.Rmd),
+     `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch02.html).
+
+  b0. Browse the  `?pvalues` help page (in the `lme4` package).
+
+  b. The `lmerTest` package has an accompanying publication in JSS (Dec, 2017):
+	  https://www.jstatsoft.org/article/view/v082i13
+
+     from which we use the (slightly extended/modified) R code,
+	 [lmerTest_v82i13.R](R/lmerTest_v82i13.R).
+
   - When can we trust the confidence intervals / P values ??
   - Profiled Likelihood - based intervals; profile pairs
   - Bootstrap -- non-iid?

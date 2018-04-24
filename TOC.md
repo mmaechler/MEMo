@@ -19,14 +19,14 @@
   c. Comparison  `aov()`, `lme()`, `lmer()`.
 
   d. Classical solution: Assume given Sigma (called G).
-	  --> https://en.wikipedia.org/wiki/Mixed_model
+	 [Wikipedia Mixed_model](https://en.wikipedia.org/wiki/Mixed_model)
 
   e. Classical solution does not scale to large q (`q = ncol(Z)`)
 
   f. --> New approach to ML and REML
 
 
-2. General Notation:  No "grouping" assumed
+2. General Notation:  No "grouping" assumed --> general Z matrix
 
 3. Inference: "No P values" vs `lmerTest` et al.
 
@@ -37,15 +37,17 @@
   b0. Browse the  `?pvalues` help page (in the `lme4` package).
 
   b. The `lmerTest` package has an accompanying publication in JSS (Dec, 2017):
-	  https://www.jstatsoft.org/article/view/v082i13
+  https://www.jstatsoft.org/article/view/v082i13
 
-     from which we use the (slightly extended/modified) R code,
-	 [lmerTest_v82i13.R](R/lmerTest_v82i13.R).
+  from which we use the (slightly extended/modified) R code,
+  [lmerTest_v82i13.R](R/lmerTest_v82i13.R).
 
   - When can we trust the confidence intervals / P values ??
   - Profiled Likelihood - based intervals; profile pairs
   - Bootstrap -- non-iid?
 
+  c. _Random slopes_ : non-scalar random effects etc:  Ch. 3 of lMMwR lecture notes
+    [R script]((https://stat.ethz.ch/~maechler/MEMo-pages/ch02.html).
 
 ### Part II:  Generalized LMM, e.g. for Count Data (Ecology)
 

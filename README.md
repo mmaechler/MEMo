@@ -16,7 +16,7 @@
 
 #### Development version (chapter-wise `*.R` versions):
 
-	https://stat.ethz.ch/~maechler/MEMo-pages/
+https://stat.ethz.ch/~maechler/MEMo-pages/
 <!-- MM update:  cp -p  ~/Vorl/MEMo/lMMwR-devel/ ~/www/MEMo-pages/   -->
 
 1.  ChIntro          -- models 01 02

@@ -14,22 +14,20 @@
  [lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf): do
  *not* print fully; more updates (incl nicer formatting) to come.
 
-#### Development version (chapter-wise `*.R` versions):
-
-https://stat.ethz.ch/~maechler/MEMo-pages/
+#### Development version (chapter-wise `*.R` versions) in https://stat.ethz.ch/~maechler/MEMo-pages/ :
 <!-- MM update: (cd  ~/Vorl/MEMo/lMMwR-devel/ ; ./0-do-web ==> ~/www/MEMo-pages/
  synchronize the scheme below w/
  ~/Vorl/MEMo/lMMwR-devel/lMMwR.Rnw
  --------------------------------- -->
 
-no | Filename (base) | Model fits fm<n> | Comments
----| --------------- | ---------------- | --------
-1. | ChIntro         | models 01 02     |
-2. | ChMultiple      | models 03 04 05  |
-3. | ChLongitudinal  | model  06 07     |
-4. | ChCovariates    | models 16 17 09 14| (mod. renamed!)
-5. | ChTheory        | model  08        |
-6. | ChGLMMBinomial  | model  10 11 12 13|
+no | Filename (base) | Model fits fm_n | Comments
+---| --------------- | --------------- | --------
+1. | ChIntro         | 01 02       |
+2. | ChMultiple      | 03 04 05    |
+3. | ChLongitudinal  | 06 07       |
+4. | ChCovariates    | 16 17 09 14 | (mod. renamed!)
+5. | ChTheory        | 08          |
+6. | ChGLMMBinomial  | 10 11 12 13 |
 
 Appendix:
 

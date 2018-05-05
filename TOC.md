@@ -46,8 +46,9 @@
   - Profiled Likelihood - based intervals; profile pairs
   - Bootstrap -- non-iid?
 
-  c. _Random slopes_ : non-scalar random effects etc:  Ch. 3 of lMMwR lecture notes
-    [R script]((https://stat.ethz.ch/~maechler/MEMo-pages/ch02.html).
+  c. _Random slopes_ : non-scalar random effects etc:  Ch. 3 of the lMMwR lecture notes,
+		[lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf);
+	  R code: [ChLongitudinal.R](https://stat.ethz.ch/~maechler/MEMo-pages/ChLongitudinal.R).
 
 ### Part II:  Generalized LMM, e.g. for Count Data (Ecology)
 

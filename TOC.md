@@ -42,6 +42,11 @@
   from which we use the (slightly extended/modified) R code,
   [lmerTest_v82i13.R](R/lmerTest_v82i13.R).
 
+An extended version of JSS paper's Appendix A, is now available at Rune Christensen's [Satterthwaite_for_LMMs](http://htmlpreview.github.io/?https://github.com/runehaubo/lmerTestR/blob/master/pkg_notes/Satterthwaite_for_LMMs.html)
+providing nice derivations on how the degrees of freedom are approximated.
+
+
+
   - When can we trust the confidence intervals / P values ??
   - Profiled Likelihood - based intervals; profile pairs
   - Bootstrap -- non-iid?

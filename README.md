@@ -14,7 +14,9 @@
  [lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf): do
  *not* print fully; more updates (incl nicer formatting) to come.
 
-#### Development version (chapter-wise `*.R` versions) in https://stat.ethz.ch/~maechler/MEMo-pages/ :
+#### lMMwR chapter-wise R scripts
+For our development version you can get chapter-wise `*.R` versions, i.e., R scripts from
+https://stat.ethz.ch/~maechler/MEMo-pages/ :
 <!-- MM update: (cd  ~/Vorl/MEMo/lMMwR-devel/ ; ./0-do-web ==> ~/www/MEMo-pages/
  synchronize the scheme below w/
  ~/Vorl/MEMo/lMMwR-devel/lMMwR.Rnw

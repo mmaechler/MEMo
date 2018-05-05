@@ -22,12 +22,13 @@
 
 no | Filename (base) | Model fits fm_n | Comments
 ---| --------------- | --------------- | --------
-1. | ChIntro         | 01 02       |
-2. | ChMultiple      | 03 04 05    |
-3. | ChLongitudinal  | 06 07       |
-4. | ChCovariates    | 16 17 09 14 | (mod. renamed!)
-5. | ChTheory        | 08          |
-6. | ChGLMMBinomial  | 10 11 12 13 |
+ 1.| ChIntro         | 01 02           |
+ 2.| ChMultiple      | 03 04 05        |
+ 3.| ChLongitudinal  | 06 07           |
+ 4.| ChCovariates    | 16 17 09 14     | relabeled models
+ 5.| ChTheory        | 08              |
+ 6.| ChGLMMBinomial  | 10 11 12 13     | (Part II)
+
 
 Appendix:
 

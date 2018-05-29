@@ -57,9 +57,25 @@ providing nice derivations on how the degrees of freedom are approximated.
 
 ### Part II:  Generalized LMM, e.g. for Count Data (Ecology)
 
-  - Model formulation; likelihood approximations
+  - Model formulation; likelihood approximations:
+	- Laplace Approximation; generalized to Adaptive Gauss-Hermite (`nAGQ = .`)
   - The new `glmmTMB` package: Zero-inflation, hurdle models, etc
 
 
-### Part III: GAMM (Generalized Additive), *Non*linear MM;  Robust Linear MM
+### Part III: *Non*linear MM (NLME)
 
+  a. Motivation and Examples: `nlme` (book) chapter 6
+     R(markdown) script: [R/ch06.Rmd](R/ch06.Rmd),
+     `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch06.html).
+  b. Glimpses into theory: `nlme` (book) chapter 7
+
+  c. Outlook into PK/PD modeling (pharmacology):  New R package
+	[`nlmixr`](https://cran.R-project.org/package=nlmixr), incl.
+	non-linear functions defined via differential equations (ODE).
+
+
+### Not treated in lecture:
+
+ - GAMM (Generalized Additive Mixed Models), e.g. `mgcv::gamm()` in R
+ - Robust Linear MM, e.g., R package
+ [`robustlmm`](https://cran.R-project.org/package=robustlmm)

@@ -67,7 +67,8 @@ providing nice derivations on how the degrees of freedom are approximated.
   a. Motivation and Examples: `nlme` (book) chapter 6
      R(markdown) script: [R/ch06.Rmd](R/ch06.Rmd),
      `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch06.html).
-  b. Glimpses into theory: `nlme` (book) chapter 7
+
+b. Glimpses into theory: `nlme` (book) chapter 7
 
   c. Outlook into PK/PD modeling (pharmacology):  New R package
 	[`nlmixr`](https://cran.R-project.org/package=nlmixr), incl.

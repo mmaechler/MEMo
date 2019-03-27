@@ -39,8 +39,9 @@
   b. The `lmerTest` package has an accompanying publication in JSS (Dec, 2017):
   https://www.jstatsoft.org/article/view/v082i13
 
-  from which we use the (slightly extended/modified) R code,
-  [lmerTest_v82i13.R](R/lmerTest_v82i13.R).
+  from which we used the (slightly extended/modified) R code,
+  [lmerTest_v82i13.R](R/lmerTest_v82i13.R) in 2018, and an extended
+  help page example on `ham` tasting data,  [lmerTest-ham-ex.R](R/lmerTest-ham-ex.R) in 2019.
 
 An extended version of JSS paper's Appendix A, is now available at Rune Christensen's [Satterthwaite_for_LMMs](http://htmlpreview.github.io/?https://github.com/runehaubo/lmerTestR/blob/master/pkg_notes/Satterthwaite_for_LMMs.html) -- [rendering correctly at MM's MEMo-pages](https://stat.ethz.ch/~maechler/MEMo-pages/Satterthwaite_for_LMMs.html) --
 providing nice derivations on how the degrees of freedom are approximated.

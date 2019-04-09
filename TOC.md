@@ -46,8 +46,6 @@
 An extended version of JSS paper's Appendix A, is now available at Rune Christensen's [Satterthwaite_for_LMMs](http://htmlpreview.github.io/?https://github.com/runehaubo/lmerTestR/blob/master/pkg_notes/Satterthwaite_for_LMMs.html) -- [rendering correctly at MM's MEMo-pages](https://stat.ethz.ch/~maechler/MEMo-pages/Satterthwaite_for_LMMs.html) --
 providing nice derivations on how the degrees of freedom are approximated.
 
-
-
   - When can we trust the confidence intervals / P values ??
   - Profiled Likelihood - based intervals; profile pairs
   - Bootstrap -- non-iid?
@@ -58,8 +56,21 @@ providing nice derivations on how the degrees of freedom are approximated.
 
 ### Part II:  Generalized LMM, e.g. for Count Data (Ecology)
 
+  - Example (`contraceptive`) of logistic GLMM: Ch. 6 of the lMMwR lecture notes,
+      [lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf);
+	  R code: [ChGLMMBinomial.R](https://stat.ethz.ch/~maechler/MEMo-pages/ChGLMMBinomial.R).
+
+  - Likelihood for logistic GLMM
+  - From binary Bernoulli to Binomial (number of 1's) via aggregation (assuming groups of identical `x_i`)
+
+  - Intro to GLMs -- Springer Text
+	[Peter K. Dunn and Gordon K. Smyth (2018) _Generalized Linear Models With Examples in R_](https://link.springer.com/book/10.1007/978-1-4419-0118-7), from Ch. 4.
+
+  [downloadable from inside ETHZ](https://link.springer.com/content/pdf/10.1007%2F978-1-4419-0118-7.pdf)
+
   - Model formulation; likelihood approximations:
 	- Laplace Approximation; generalized to Adaptive Gauss-Hermite (`nAGQ = .`)
+
   - The new `glmmTMB` package: Zero-inflation, hurdle models, etc
 
 

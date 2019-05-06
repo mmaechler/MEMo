@@ -63,9 +63,17 @@ providing nice derivations on how the degrees of freedom are approximated.
   - Likelihood for logistic GLMM
   - From binary Bernoulli to Binomial (number of 1's) via aggregation (assuming groups of identical `x_i`)
 
-  - Somewhat gentle introdoctuion to GLMs -- Springer Text
+  - Somewhat gentle introduction to GLMs -- Springer Text
 	[Peter K. Dunn and Gordon K. Smyth (2018) _Generalized Linear Models With Examples in R_](https://link.springer.com/book/10.1007/978-1-4419-0118-7), from Ch. 4,
   [downloadable from inside ETHZ](https://link.springer.com/content/pdf/10.1007%2F978-1-4419-0118-7.pdf).
+
+  - Modeling Count Data (by GLMs), including Hurdle and Zero-Inflation Models:
+	_Regression Models for Count Data in R_ vignette `countreg` from CRAN package
+	[`pscl`](https://cran.r-project.org/package=pscl), slightly commented
+	by MM, as
+	[Rnw](https://stat.ethz.ch/~maechler/MEMo-pages/countreg.Rnw),  and
+	[pdf](https://stat.ethz.ch/~maechler/MEMo-pages/countreg.pdf).
+
 
   - Model formulation; likelihood approximations:
 	- Laplace Approximation; generalized to Adaptive Gauss-Hermite (`nAGQ = .`)

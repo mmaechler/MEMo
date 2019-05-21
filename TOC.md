@@ -7,7 +7,7 @@
 
 1. Introduction - 1- and 2-way ANOVA and beyond
 
-#### 'The' book: Pinheiro, J.C., and Bates, D.M. (2000) *Mixed-Effects Models in S and S-PLUS*, Springer.
+#### 'The' `nlme` book: Pinheiro, J.C., and Bates, D.M. (2000) *Mixed-Effects Models in S and S-PLUS*, Springer.
 	available typically at https://link.springer.com/book/10.1007%2Fb98882
 
   a. `nlme` (book) chapter 1: Rail, ... .. "anova" notation: 1-way anova, 2-way
@@ -76,9 +76,21 @@ providing nice derivations on how the degrees of freedom are approximated.
 
 
   - Model formulation; likelihood approximations:
-	- Laplace Approximation; generalized to Adaptive Gauss-Hermite (`nAGQ = .`)
+	- Laplace Approximation; generalized to Adaptive Gauss-Hermite
+      Quadrature (=: AGQ) (in R, `glmer(*,  nAGQ = k)`).
 
-  - The new `glmmTMB` package: Zero-inflation, hurdle models, etc
+    - CRAN package [`GLMMadaptive`](https://cran.r-project.org/package=GLMMadaptive)
+      promising special emphasis on AGQ.
+	  We use its _GLMMadaptive Basics_ vignette, extended by MM.
+	  Get the Rmarkdown source, and R and pdf,
+	  [Rmd](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.Rnw),
+		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  and
+      [pdf](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.pdf).
+
+  - (not in 2019:) CRAN package
+    [`glmmTMB`](https://cran.r-project.org/package=glmmTMB) :
+    Zero-inflation, hurdle models, etc; fast algorithms via automatic
+    differentiation numerics (`TMB` = Template Model Builder).
 
 
 ### Part III: *Non*linear MM (NLME)

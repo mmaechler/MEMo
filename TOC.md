@@ -82,9 +82,9 @@ providing nice derivations on how the degrees of freedom are approximated.
     - CRAN package [`GLMMadaptive`](https://cran.r-project.org/package=GLMMadaptive)
       promising special emphasis on AGQ.
 	  We use its _GLMMadaptive Basics_ vignette, extended by MM.
-	  Get the Rmarkdown source, and R and pdf,
-	  [Rmd](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.Rnw),
-		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  and
+	  Get the Rmarkdown source
+	  [Rmd](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.Rnw), or R script,
+		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  and rendered
       [pdf](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.pdf).
 
   - (not in 2019:) CRAN package

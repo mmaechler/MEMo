@@ -99,11 +99,15 @@ providing nice derivations on how the degrees of freedom are approximated.
      R(markdown) script: [R/ch06.Rmd](R/ch06.Rmd),
      `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch06.html).
 
-b. Glimpses into theory: `nlme` (book) chapter 7
+  b. Glimpses into theory: `nlme` (book) chapter 7 (handouts of p.306--309)
 
   c. Outlook into PK/PD modeling (pharmacology):  New R package
 	[`nlmixr`](https://cran.R-project.org/package=nlmixr), incl.
 	non-linear functions defined via differential equations (ODE).
+
+  d. *N*on-*l*inear *M*ixed-*E*ffects (NLME): `nlme` (book) chapter 8, adapted R(markdown)
+     script: [R/ch08.Rmd](R/ch08.Rmd),
+     `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch08.html).
 
 
 ### Not treated in lecture:

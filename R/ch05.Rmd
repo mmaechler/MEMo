@@ -8,6 +8,12 @@ library(nlme)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
 if(!dev.interactive(TRUE)) pdf(file = 'ch05_plot.pdf')
+```{r, setup2, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE
+  , comment = NA  # MM: R output is *not* comment!   was "#>"
+  , prompt = TRUE # MM: yes, should look like R session
+)
 ```
 
 # Chapter 5    Extending the Basic Linear Mixed-Effects Models

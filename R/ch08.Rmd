@@ -21,13 +21,24 @@ From **The Book**
 
 ## 8.1 Fitting Nonlinear Models in S with nls and nlsList
 
-```{r, setup, eval=FALSE}
+```{r, setup, echo=FALSE}
 library(nlme)
 library(lattice)
 options(width = 65, digits = 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
 if(!dev.interactive(TRUE)) pdf(file = 'ch08_plot.pdf')
 ```
+```{r, setup2, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE
+  , comment = NA  # MM: R output is *not* comment!   was "#>"
+  , prompt = TRUE # MM: yes, should look like R session
+)
+```
+
+###  8.1.1  Using the `nls()` Function
+
+
 ```{r, Orange-logist}
 ## outer = ~1 is used to display all five curves in one panel
 plot(Orange, outer = ~1)
@@ -43,9 +54,18 @@ fm1Oran.nls <- nls(circumference ~ logist(age, Asym, xmid, scal),
                    data = Orange,
                    start = c(Asym = 170, xmid = 700, scal = 500))
 summary(fm1Oran.nls)
-plot(fm1Oran.nls)
-plot(fm1Oran.nls, Tree ~ resid(.), abline = 0)
+plot(fm1Oran.nls) # Fig. 8.2  (p. 341)
+plot(fm1Oran.nls, Tree ~ resid(.), abline = 0)  # Figure 8.3 (p. 342)
 ```
+
+
+###  8.1.2  Self-Starting Nonlinear Model Functions - p. 342
+
+Bates and Watts (1988, 3.2) describe techniques for determining starting estimates in a nonlinear regression, e.g.,
+
+- taking advantage of _partially linear_ models, so that initla estimates are needed only for those parameters that enter the model **non**linearly; in R, read docu on  `nls(*, method="plinear")`.
+
+
 ```{r, initialValues-Orange}
 Orange.sortAvg <- sortedXyData("age", "circumference", Orange)
 Orange.sortAvg
@@ -74,6 +94,8 @@ getInitial(circumference ~ SSlogis(age,Asym, xmid, scal), Orange)
 nls(circumference ~ SSlogis(age, Asym, xmid, scal), Orange)
 ```
 
+###  8.1.3  Separate Nonlinear Fits by Group: The `nlsList()` Function -  p. 347
+
 ```{r, nlsList-Orange}
 fm1Oran.lis <-
    nlsList(circumference ~ SSlogis(age, Asym, xmid, scal) | Tree,
@@ -99,7 +121,7 @@ pairs(fm1Theo.lis, id = 0.1)
 ```
 
 
-## 8.2 Fitting Nonlinear Mixed-Effects Models with nlme
+## 8.2 Fitting Nonlinear Mixed-Effects Models with nlme  (p. 345)
 
 Again, the `Orange` growth data; no need to specify groups, as `Orange` is a `r "groupedData"`
 object:
@@ -414,7 +436,7 @@ intervals(fm5Ovar.nlme, which = "fixed")
 ```
 
 
-### 8.3.3 Fitting Extended Nonlin. Regr. Models w/ `gnls()`,  p.401 ff
+###  8.3.3 Fitting Extended Nonlin. Regr. Models w/ `gnls()`,  p.401 ff
 
 #### High-Flux Hemodialyzer Ultrafiltration Rates - `Dialyzer`
 

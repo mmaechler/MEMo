@@ -9,10 +9,11 @@ From **The Book**
 
 ```{r, setup }
 library(nlme)
-if(!dev.interactive(TRUE)) pdf(file = 'ch01.pdf')
-options(width = 65, digits = 5 ,
+if(!dev.interactive(TRUE)) pdf(file = 'ch01_plot.pdf')
+options(width = 75  # MM: width 65 is too narrow
+      , digits = 5 
         ## contrast setting: as `S`, not default in `R` :
-        contrasts = c(unordered = "contr.helmert",
+      ,  contrasts = c(unordered = "contr.helmert",
                         ordered = "contr.poly") )
 ```
 

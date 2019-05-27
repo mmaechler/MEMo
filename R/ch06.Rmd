@@ -21,14 +21,17 @@ From **The Book**
 
 ```{r, setup}
 library(nlme)
-options(width = 75, digits = 5) # MM: width 65 is too narrow
-options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
+options(width = 75  # MM: width 65 is too narrow
+      , digits = 5 
+      , contrasts = c(unordered = "contr.helmert",
+                        ordered = "contr.poly") )
 if(!dev.interactive(TRUE)) pdf(file = 'ch06_plot.pdf')
 ```{r, setup2, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE
   , comment = NA  # MM: R output is *not* comment!   was "#>"
   , prompt = TRUE # MM: yes, should look like R session
+  , fig.width = 9 # MM: default 7 (too narrow)
 )
 ```
 

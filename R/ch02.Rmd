@@ -4,11 +4,12 @@ From **The Book**
 
 ```{r }
 library( nlme )
-options( width = 65, digits = 5 )
-options( contrasts = c(unordered = "contr.helmert",
-         ordered = "contr.poly") )
+options(width = 75  # MM: width 65 is too narrow
+      , digits = 5 
+      , contrasts = c(unordered = "contr.helmert",
+                      ordered = "contr.poly") )
 if(!dev.interactive()) ## interactively, rather use color etc
-pdf( file = 'ch02.pdf' )
+    pdf(file = 'ch02_plot.pdf')
 ```
 
 # Chapter 2    Theory and Computational Methods for Linear Mixed-Effects Models

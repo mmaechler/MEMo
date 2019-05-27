@@ -94,7 +94,7 @@ plot(machineLRTsim, df = c(0, 1),      # produces Figure 2.4
 
 ```{r, simul-stool}
 system.time( stoolLRTsim <-
-  simulate.lme(     list(fixed = effort ~ 1, random = ~ 1 | Subject, data=ergoStool),
+  simulate.lme(     list(fixed = effort ~ 1, random = ~ 1 | Subject, data = ergoStool),
                m2 = list(fixed = effort ~ Type), # (other args: the same)
                method = "ML", nsim = 1000 )
 ) ## 2.4 sec
@@ -104,9 +104,9 @@ plot( stoolLRTsim, df = c(3, 4) )    # Figure 2.5
 ```{r, simul-PBIB, cache=TRUE}
 data( PBIB, package = 'SASmixed')# not in "nlme"
 system.time( pbibLRTsim <-
-  simulate.lme(     list(fixed= response ~ 1,         random= ~ 1 | Block, data=PBIB),
-               m2 = list(fixed= response ~ Treatment, random= ~ 1 | Block, data=PBIB),
-               method = "ML", nsim = 1000))# 8.9 sec | ^^^^.. (needed here - why ?)
+    simulate.lme(     list(fixed= response ~ 1,         random= ~ 1 | Block, data=PBIB),
+                 m2 = list(fixed= response ~ Treatment, random= ~ 1 | Block, data=PBIB),
+                 method = "ML", nsim = 1000))# 8.9 sec | ^^^^.. (needed here - why ?)
 plot( pbibLRTsim, df = c(14,16,18), weights = FALSE )    # Figure 2.6
 ```
 

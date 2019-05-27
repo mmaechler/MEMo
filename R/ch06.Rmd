@@ -23,7 +23,13 @@ From **The Book**
 library(nlme)
 options(width = 75, digits = 5) # MM: width 65 is too narrow
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
-if(!dev.interactive(TRUE)) pdf(file = 'ch06.pdf')
+if(!dev.interactive(TRUE)) pdf(file = 'ch06_plot.pdf')
+```{r, setup2, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE
+  , comment = NA  # MM: R output is *not* comment!   was "#>"
+  , prompt = TRUE # MM: yes, should look like R session
+)
 ```
 
 ## 6.2 Indomethicin Kinetics
@@ -61,7 +67,11 @@ anova(fm1Indom.nlme, fm2Indom.nlme)# almost same fit in smaller model: keep it
 
 # Consider correlations between RE's
 (fm3Indom.nlme <- update(fm2Indom.nlme, random = A1+lrc1+A2 ~ 1))
-                                        # warning "did not converge" .. but only in iter. 1
+                  # warning "did not converge" .. but only in iter. 1
+
+## try to "obey" and increase msMaxIter: --> next limit
+update(fm2Indom.nlme, random = A1+lrc1+A2 ~ 1,
+                         control = nlmeControl(msMaxIter = 500))
 
 
 
@@ -70,6 +80,7 @@ anova(fm1Indom.nlme, fm2Indom.nlme)# almost same fit in smaller model: keep it
 fm4Indom.nlme <-
     update(fm3Indom.nlme,
            random = pdBlocked(list(A1 + lrc1 ~ 1, A2 ~ 1)))
+fm4Indom.nlme
 anova(fm3Indom.nlme, fm4Indom.nlme) # => "equivalent"; '4' is smaller
 anova(fm2Indom.nlme, fm4Indom.nlme) # => '4' >> '2' clearly
 plot(fm4Indom.nlme, id = 0.05, adj = -1)# Tukey-Anscombe plot (resid ~ fitted)

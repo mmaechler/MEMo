@@ -1,5 +1,5 @@
-# MEMo -- Mixed(-effects) Models
-## Mixed-Effects Models (using R and stats/math) -- class at ETH Zurich
+# MEMo -- Mixed(-Effects) Models
+## "Advanced Statistical Modelling: Mixed Models" [ETH Zurich class 401-4626-00L](http://vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2020S&ansicht=ALLE&lerneinheitId=135585&lang=en)
 
 ## Table of Content -- with further links: [__TOC.md__](TOC.md)
 

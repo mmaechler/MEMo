@@ -30,9 +30,9 @@ summary(fm1Rail.lm)
 ```
 A one-way (1-way) ANOVA model assumes "Rail effect",
 $$ Y_{i,j} = \mu + \beta_i + \varepsilon_{i,j}, $$
-with $i = 1,2,\dots,m (= 6)$, for $j=1,\dots,n_i ( = 6)$, for $n$ observations $n = \sum_{i=1}^m$,
+with $i = 1,2,\dots,m\;(= 6)$, for $j=1,\dots,n_i\;( = 3)$, for $n$ observations $n = \sum_{i=1}^{m}n_{i}$,
 and the usual assumption
-$$\varepsilon_{i,j} \mathrm{i.i.d.} \ \sim  \mathcal{N}(0, \sigma^2).$$
+$$\varepsilon_{i,j} \overset{\mathrm{i.i.d.}}{\sim} \mathcal{N}(0, \sigma^2).$$
 
 
 ```{r, Rail-lm}
@@ -48,8 +48,8 @@ and the Rail effect _is_ significant.  Alternatively, as the rails are
 randomly selected from a large number of possible rails, we consider a
 __random__ Rail effect,
 
-$$ Y_{i,j} = \mu + \b_i + \varepsilon_{i,j}, $$
-for $ i = 1,2,\dots,m;  j=1,\dots,n_i$, where $b_i \sim \mathcal{N}(0,
+$$ Y_{i,j} = \mu + b_i + \varepsilon_{i,j}, $$
+for $i = 1,2,\dots,m$; $j=1,\dots,n_i$, where $b_i \sim \mathcal{N}(0,
 \sigma_b^2)$ and the $b_i$ and $\varepsilon_{i,j}$ are independent.
 
 Instead of the $m-1$ parameters $\beta_i$ ("-1" via a contrast setting),

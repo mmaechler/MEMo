@@ -10,10 +10,8 @@
 
 ### Doug Bates *lme4: Mixed-effects modeling with R* (~2010), unpublished;
  Feb.2010 version public e.g., on R-forge at http://lme4.r-forge.r-project.org/book/
-#### Updated ("development") version :
- [lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf): do
- *not* print fully; more updates (incl nicer formatting) to come.
-
+#### Updated ("development") version (by M.M.):
+ [lMMwR.pdf](https://stat.ethz.ch/~maechler/MEMo-pages/lMMwR.pdf).
 #### lMMwR chapter-wise R scripts
 For our development version you can get chapter-wise `*.R` versions, i.e., R scripts from
 https://stat.ethz.ch/~maechler/MEMo-pages/ :

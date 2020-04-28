@@ -64,13 +64,14 @@ providing nice derivations on how the degrees of freedom are approximated.
   - From binary Bernoulli to Binomial (number of 1's) via aggregation (assuming groups of identical `x_i`)
   - 2020: COVID-19 pandemic: News: [**Air pollution linked with higher COVID-19 death rates**](https://www.hsph.harvard.edu/news/hsph-in-the-news/air-pollution-linked-with-higher-covid-19-death-rates/) study from Harvard School of Public Health; e.g. [New York Times, April 7](https://www.nytimes.com/2020/04/07/climate/air-pollution-coronavirus-covid.html).
  Harvard publication, updated several times; latest of April 24): <https://projects.iq.harvard.edu/covid-pm>.  That page
-       - mentions that everything is reproducible available on <https://github.com/wxwx1993/PM_COVID>
-       - asks to cite
-  
-	Exposure to air pollution and COVID-19 mortality in the United States. 
+       - mentions that everything is reproducible available on <https://github.com/wxwx1993/PM_COVID> , and  asks to cite
+       
+        Exposure to air pollution and COVID-19 mortality in the United States. 
 	Xiao Wu, Rachel C. Nethery, Benjamin M. Sabath, Danielle Braun, Francesca Dominici. 
 	medRxiv 2020.04.05.20054502; doi: https://doi.org/10.1101/2020.04.05.20054502 
-	
+
+      - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to 
+	<https://github.com/mmaechler/PM_COVID> in order to add more.
   
   - Somewhat gentle introduction to GLMs -- Springer Text
 	[Peter K. Dunn and Gordon K. Smyth (2018) _Generalized Linear Models With Examples in R_](https://link.springer.com/book/10.1007/978-1-4419-0118-7), from Ch. 4,

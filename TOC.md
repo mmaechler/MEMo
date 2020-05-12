@@ -61,16 +61,19 @@ providing nice derivations on how the degrees of freedom are approximated.
 	  R code: [ChGLMMBinomial.R](https://stat.ethz.ch/~maechler/MEMo-pages/ChGLMMBinomial.R).
 
   - Likelihood for logistic GLMM
+
   - From binary Bernoulli to Binomial (number of 1's) via aggregation (assuming groups of identical `x_i`)
+
   - 2020: COVID-19 pandemic: News: [**Air pollution linked with higher COVID-19 death rates**](https://www.hsph.harvard.edu/news/hsph-in-the-news/air-pollution-linked-with-higher-covid-19-death-rates/) study from Harvard School of Public Health; e.g. [New York Times, April 7](https://www.nytimes.com/2020/04/07/climate/air-pollution-coronavirus-covid.html).
- Harvard publication, updated several times; latest of April 24): <https://projects.iq.harvard.edu/covid-pm>.  That page
+ Harvard publication, updated several times; latest of April 24): <https://projects.iq.harvard.edu/covid-pm>.
+
        - mentions that everything is reproducible available on <https://github.com/wxwx1993/PM_COVID> , and  asks to cite
 
-        Exposure to air pollution and COVID-19 mortality in the United States.
-	Xiao Wu, Rachel C. Nethery, Benjamin M. Sabath, Danielle Braun, Francesca Dominici.
-	medRxiv 2020.04.05.20054502; https://doi.org/10.1101/2020.04.05.20054502
+       - Exposure to air pollution and COVID-19 mortality in the United States.  
+         Xiao Wu, Rachel C. Nethery, Benjamin M. Sabath, Danielle Braun, Francesca Dominici.  
+	     medRxiv 2020.04.05.20054502; https://doi.org/10.1101/2020.04.05.20054502
 
-  - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to <https://github.com/mmaechler/PM_COVID> in order to add more.
+       - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to <https://github.com/mmaechler/PM_COVID> in order to add more.
 
 
 

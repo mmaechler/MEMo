@@ -97,11 +97,10 @@ providing nice derivations on how the degrees of freedom are approximated.
 		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  and rendered
       [pdf](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.pdf).
 
-  - (not in 2019:) CRAN package
-    [`glmmTMB`](https://cran.r-project.org/package=glmmTMB) :
+  - (o:) CRAN package
+    [`glmmTMB`](https://cran.r-project.org/package=glmmTMB):
     Zero-inflation, hurdle models, etc; fast algorithms via automatic
-    differentiation numerics (`TMB` = Template Model Builder).
-
+    differentiation numerics (`TMB` = Template Model Builder);  (https://journal.r-project.org/archive/2017/RJ-2017-066/)
 
 ### Part III: *Non*linear MM (NLME)
 

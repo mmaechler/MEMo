@@ -70,8 +70,7 @@ providing nice derivations on how the degrees of freedom are approximated.
 	Xiao Wu, Rachel C. Nethery, Benjamin M. Sabath, Danielle Braun, Francesca Dominici.
 	medRxiv 2020.04.05.20054502; https://doi.org/10.1101/2020.04.05.20054502
 
-      - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to
-	<https://github.com/mmaechler/PM_COVID> in order to add more.
+  - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to <https://github.com/mmaechler/PM_COVID> in order to add more.
 
 
 

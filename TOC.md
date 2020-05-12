@@ -104,6 +104,7 @@ providing nice derivations on how the degrees of freedom are approximated.
   Two examples, comparison with other R pkgs in
   [R journal paper](https://journal.r-project.org/archive/2017/RJ-2017-066/)
 
+
 ### Part III: *Non*linear MM (NLME)
 
   a. Motivation and Examples: `nlme` (book) chapter 6

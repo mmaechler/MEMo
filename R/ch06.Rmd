@@ -1,7 +1,7 @@
 ---
 title: "Extended R script of Chapt.6  __Nonlinear ME Models__"
 author: "Pinheiro, Bates (2000) and Maechler (2018, s. below)"
-date: "May 29, 2018"
+date: "May 18, 2020"
 output:
   html_document:
     toc: TRUE
@@ -22,7 +22,7 @@ From **The Book**
 ```{r, setup}
 library(nlme)
 options(width = 75  # MM: width 65 is too narrow
-      , digits = 5 
+      , digits = 5
       , contrasts = c(unordered = "contr.helmert",
                         ordered = "contr.poly") )
 if(!dev.interactive(TRUE)) pdf(file = 'ch06_plot.pdf')
@@ -78,7 +78,7 @@ update(fm2Indom.nlme, random = A1+lrc1+A2 ~ 1,
 
 
 
-# only keep correlation in "first block" (A1, lrc1):
+# only keep correlation in "first block" (A1, lrc1);  set ran.eff.(lrc2) to 0
 
 fm4Indom.nlme <-
     update(fm3Indom.nlme,

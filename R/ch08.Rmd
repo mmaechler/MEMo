@@ -1,7 +1,7 @@
 ---
 title: "Extended R script of Chapt.8  __Fitting Nonlinear ME Models__"
-author: "Pinheiro, Bates (2000) and Maechler (2018-9, s. below)"
-date: "May 27, 2019"
+author: "Pinheiro, Bates (2000) and Maechler (2018-2020, s. below)"
+date: "May 26, 2020"
 output:
   html_document:
     toc: TRUE
@@ -132,7 +132,7 @@ fm1Oran.nlme <-
    nlme(circumference ~ SSlogis(age, Asym, xmid, scal),
        data = Orange,
        ## random is omitted - by default it is equal to fixed (too large here)
-       fixed = Asym + xmid + scal ~ 1,
+       fixed = Asym + xmid + scal ~ 1,                       # --------> WARNING
        start = fixef(fm1Oran.lis),
        ## MMä: to achieve convergence (with warnings (not shown)):
        control = nlmeControl(opt = "nlm",
@@ -175,26 +175,27 @@ qqnorm(fm3Theo.nlme, ~ ranef(.))
 #### `CO2` Carbon Dioxide Uptake (p. 398 ff)
 
 The $CO_2$  (grouped)Data is about _cold tolerance_ of a $C_4$ grass species.
-Look at the data and compute first models, assuming the `SSasympOff()` 3-parameter exponential model:
-
+Look at the data
 ```{r, CO2-data}
 CO2
 plot(CO2, outer = ~Treatment*Type, layout = c(4,1))
 ```
+and compute first models, assuming the `SSasympOff()` 3-parameter exponential model:
 ```{r, nlsL+nlme-CO2}
 (fm1CO2.lis <- nlsList(SSasympOff, CO2))
 (fm1CO2.nlme <- nlme(fm1CO2.lis))
 (fm2CO2.nlme <- update(fm1CO2.nlme, random = Asym + lrc ~ 1))
 anova(fm1CO2.nlme, fm2CO2.nlme)
-plot(fm2CO2.nlme,id = 0.05,cex = 0.8,adj = -0.5)
+plot(fm2CO2.nlme,id = 0.05,cex = 0.8,adj = -0.5) # Figure 8.16,  p.371
 
 fm2CO2.nlmeRE <- ranef(fm2CO2.nlme, augFrame = TRUE)
 fm2CO2.nlmeRE
 class(fm2CO2.nlmeRE)
-plot(fm2CO2.nlmeRE, form = ~ Type * Treatment)
+plot(fm2CO2.nlmeRE, form = ~ Type * Treatment) # Figure 8.17
 contrasts(CO2$Type)
 contrasts(CO2$Treatment)
 ```
+The `*.nlmeRE` plot shows astrong relationship of the RE's to  all `Type` x `Treatment` combinations.  Hence we add these as \emph{fixed} effects (for the asymptote `Asym` curve parameter):
 
 ```{r, more-nlme-CO2}
 fm3CO2.nlme <- update(fm2CO2.nlme,
@@ -202,16 +203,22 @@ fm3CO2.nlme <- update(fm2CO2.nlme,
         start = c(32.412, 0, 0, 0, -4.5603, 49.344))
 summary(fm3CO2.nlme)
 anova(fm3CO2.nlme, Terms = 2:4)
+
 fm3CO2.nlmeRE <- ranef(fm3CO2.nlme, aug = TRUE)
-plot(fm3CO2.nlmeRE, form = ~ Type * Treatment)
-fm3CO2.fix <- fixef(fm3CO2.nlme)
+plot(fm3CO2.nlmeRE, form = ~ Type * Treatment)# Figure 8.18 : much smaller range
+
+fm3CO2.fix <- fixef(fm3CO2.nlme) # to use in 'start = ..'
 fm4CO2.nlme <- update(fm3CO2.nlme,
                 fixed = list(Asym + lrc ~ Type * Treatment, c0 ~ 1),
                 start = c(fm3CO2.fix[1:5], 0, 0, 0, fm3CO2.fix[6]))
 summary(fm4CO2.nlme)
 fm5CO2.nlme <- update(fm4CO2.nlme, random = Asym ~ 1)
-anova(fm4CO2.nlme, fm5CO2.nlme)
+anova(fm4CO2.nlme, fm5CO2.nlme) # *no* signif. difference
+```
 
+Well, is a random effect (for `Asym`) needed at all?
+Try sophisticated non-linear (fixed-effects only) model via `nls()` :
+```{r, nls-only-CO2}
 CO2$type <- 2 * (as.integer(CO2$Type) - 1.5)
 CO2$treatment <- 2 * (as.integer(CO2$Treatment) - 1.5)
 fm1CO2.nls <- nls(uptake ~ SSasympOff(conc, Asym.Intercept +
@@ -234,6 +241,9 @@ plot(augPred(fm5CO2.nlme, level = 0:1),  ## FIXME: problem with levels
 
 #### Clinical Study of `Quinidine` (p.378 ff)
 
+_The quinidine data are routine clinical pharmacokinetic data charac-
+terized by extensive dosage histories for each patient, but relatively sparse
+information on concentration._
 ```{r, Quin.nlme, cache=TRUE}
 fm1Quin.nlme <-
  nlme(conc ~ quinModel(Subject, time, conc, dose, interval,
@@ -244,7 +254,6 @@ fm1Quin.nlme <-
       na.action = NULL, naPattern =  ~ !is.na(conc), verbose = TRUE)
 fm1Quin.nlme
 ```
-
 Which covariates may account for the patient-to-patient variation?
 Extract random effects _augmented_ with mean/mode of covariates,
 visualized in Figure 8.20 (p.382):

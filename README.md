@@ -14,7 +14,7 @@
 #### lMMwR chapter-wise R scripts
 For our development version you can get chapter-wise `*.R` versions, i.e., R scripts from
 https://stat.ethz.ch/~maechler/MEMo-pages/ :
-<!-- MM update: (cd  ~/Vorl/MEMo/lMMwR-devel/ ; ./0-do-web ==> ~/www/MEMo-pages/
+<!-- MM update: (cd  ~/Vorl/MEMo/lMMwR-devel/ ; ./0-do-web ) # ==> ~/www/MEMo-pages/
  synchronize the scheme below w/
  ~/Vorl/MEMo/lMMwR-devel/lMMwR.Rnw
  --------------------------------- -->

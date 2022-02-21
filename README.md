@@ -1,6 +1,5 @@
 # MEMo -- Mixed(-Effects) Models
-## "Advanced Statistical Modelling: Mixed Models" [ETH Zurich class 401-4626-00L](http://vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?semkez=2020S&ansicht=ALLE&lerneinheitId=135585&lang=en)
-
+## "Advanced Statistical Modelling: Mixed Models" [ETH Zurich class 401-4626-00L](http://vvz.ethz.ch/Vorlesungsverzeichnis/lerneinheit.view?lang=en&semkez=2022S&ansicht=ALLE&lerneinheitId=157439&)
 ## Table of Content -- with further links: [__TOC.md__](TOC.md)
 
 ## Literature:

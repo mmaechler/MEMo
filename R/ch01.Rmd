@@ -3,7 +3,7 @@ From **The Book**
 #  *Mixed-Effects Models in S and S-PLUS*, Springer.
 
 - Copyright (2000) Jose Pinheiro and Douglas Bates (Book!!)
-- Copyright (2018) Martin Maechler (transl. to `Rmd`; additional plots, etc)
+- Copyright (2018-22) Martin Maechler (transl. to `Rmd`; additional plots, etc)
 
 # Chapter 1 ---  Linear Mixed-Effects Models: Basic Concepts and Examples
 
@@ -11,10 +11,10 @@ From **The Book**
 library(nlme)
 if(!dev.interactive(TRUE)) pdf(file = 'ch01_plot.pdf')
 options(width = 75  # MM: width 65 is too narrow
-      , digits = 5 
+      , digits = 5
         ## contrast setting: as `S`, not default in `R` :
-      ,  contrasts = c(unordered = "contr.helmert",
-                        ordered = "contr.poly") )
+      ,  contrasts = c(unordered = "contr.helmert", # <= see below
+                         ordered = "contr.poly") )
 ```
 
 ## 1.1 A Simple Example of Random Effects
@@ -30,7 +30,8 @@ summary(fm1Rail.lm)
 ```
 A one-way (1-way) ANOVA model assumes "Rail effect",
 $$ Y_{i,j} = \mu + \beta_i + \varepsilon_{i,j}, $$
-with $i = 1,2,\dots,m\;(= 6)$, for $j=1,\dots,n_i\;( = 3)$, for $n$ observations $n = \sum_{i=1}^{m}n_{i}$,
+with $i = 1,2,\dots,m\;(= 6)$, for $j=1,\dots,n_i\;( = 3)$,
+for $n$ observations $n = \sum_{i=1}^{m} n_i$,
 and the usual assumption
 $$\varepsilon_{i,j} \overset{\mathrm{i.i.d.}}{\sim} \mathcal{N}(0, \sigma^2).$$
 
@@ -38,13 +39,36 @@ $$\varepsilon_{i,j} \overset{\mathrm{i.i.d.}}{\sim} \mathcal{N}(0, \sigma^2).$$
 ```{r, Rail-lm}
 ## if we have an intercept, cannot use all 6 levels (singular matrix):
 fm2.Rail.lm <- lm( travel ~ Rail, data = Rail.u )
-summary(fm2.Rail.lm) # R's default is 'treatment' contrast: 1st level := 0
-## In this case of  1-way ANOVA: Nicer to drop the intercept
-fm2Rail.lm <- lm( travel ~ Rail - 1, data = Rail.u )
-summary(fm2Rail.lm)
-anova(fm2Rail.lm)
+# Above have set "helmert" contrast [R's default is "treatment"'": 1st level := 0]
+summary(fm2.Rail.lm)
+## In this case of 1-way ANOVA: Nicer to drop the intercept (`- 1`):
+fm2Rail_no_I <- lm( travel ~ Rail - 1, data = Rail.u )
+summary(fm2Rail_no_I)
+anova(fm2Rail_no_I)
 ```
-and the Rail effect _is_ significant.  Alternatively, as the rails are
+and the Rail effect _is_ significant.
+
+### Excursion: Contrasts, model matrices for linear models `lm`:
+```{r, Rail-X-mat}
+X  <- model.matrix(fm2.Rail.lm) # "helmert"
+X. <- model.matrix(fm2Rail_no_I)# no intercept
+Xs <- model.matrix(lm( travel ~ C(Rail, sum),       data = Rail.u )) # "sum"
+Xt <- model.matrix(lm( travel ~ C(Rail, treatment), data = Rail.u )) # "treatment"
+require("Matrix")
+Matrix(X , sparse=TRUE) # "helmert"   also: as(X, "sparseMatrix")
+Matrix(X., sparse=TRUE) # no intercept
+zapsmall(crossprod(X)) # =  X'X = t(X) %*% X  but more efficiently
+## X'X diagonal <==> X has orthogonal columns <==> all fixed effects are uncorrelated
+Matrix(crossprod(X.))
+shortNms <- function(mat) { colnames(mat) <- abbreviate(colnames(mat)); mat }
+Matrix(shortNms(Xs), sparse=TRUE) # "sum"       contrasts
+Matrix(shortNms(Xt), sparse=TRUE) # "treatment" contrasts: beta_1 == 0
+```
+
+
+### Random effects
+
+Alternatively, as the rails are
 randomly selected from a large number of possible rails, we consider a
 __random__ Rail effect,
 

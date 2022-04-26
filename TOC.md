@@ -75,8 +75,8 @@ providing nice derivations on how the degrees of freedom are approximated.
 
        - I have forked the **R** code for the Generalized Linear Mixed Model (GLMM) which is their model to <https://github.com/mmaechler/PM_COVID> in order to add more.
 
-
-
+  - [Venabels and Ripley (2002) Modern Applied Statistics with S (= *MASS*), 4th ed.](https://link.springer.com/book/10.1007/978-0-387-21706-2);
+    chapter [7. Generalized Linear Models](https://link.springer.com/content/pdf/10.1007%2F978-0-387-21706-2_7.pdf), intro pages 183-187.
   - Somewhat gentle introduction to GLMs -- Springer Text
 	[Peter K. Dunn and Gordon K. Smyth (2018) _Generalized Linear Models With Examples in R_](https://link.springer.com/book/10.1007/978-1-4419-0118-7), from Ch. 4,
   [downloadable from inside ETHZ](https://link.springer.com/content/pdf/10.1007%2F978-1-4419-0118-7.pdf).

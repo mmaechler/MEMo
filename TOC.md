@@ -97,7 +97,8 @@ providing nice derivations on how the degrees of freedom are approximated.
 	  We use its _GLMMadaptive Basics_ vignette, extended by MM.
 	  Get the Rmarkdown source
 	  [Rmd](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.Rnw), or R script,
-		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  and rendered
+		[R](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.R),  rendered
+      [html](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.html) or
       [pdf](https://stat.ethz.ch/~maechler/MEMo-pages/GLMMadaptive_basics_MM.pdf).
 
   - (Outlook only:) CRAN package [`glmmTMB`](https://cran.r-project.org/package=glmmTMB):

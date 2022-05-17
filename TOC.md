@@ -108,13 +108,13 @@ providing nice derivations on how the degrees of freedom are approximated.
   [R journal paper](https://journal.r-project.org/archive/2017/RJ-2017-066/)
 
 
-### Part III: *Non*linear MM (NLME)
+### Part III: *Non*linear MM (NLMM / NLME)
 
-  a. Motivation and Examples: `nlme` (book) chapter 6
+  a. Motivation and Examples: `nlme` [(book)](https://link.springer.com/book/10.1007/b98882) chapter 6
      R(markdown) script: [R/ch06.Rmd](R/ch06.Rmd),
      `rmarkdown::render()`ed [html](https://stat.ethz.ch/~maechler/MEMo-pages/ch06.html).
 
-  b. Glimpses into theory: `nlme` (book) chapter 7 (handouts of p.306--309)
+  b. Glimpses into theory: `nlme` [book ch.7](https://link.springer.com/chapter/10.1007/0-387-22747-4_7), notably p.306--309.
 
   c. Outlook into PK/PD modeling (pharmacology):  New R package
 	[`nlmixr`](https://cran.R-project.org/package=nlmixr), incl.
